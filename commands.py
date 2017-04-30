@@ -1,5 +1,8 @@
 import subprocess
 import os
+import requests
+from bs4 import BeautifulSoup
+from getanswer import Fetcher
 
 
 class Commander:
@@ -14,6 +17,10 @@ class Commander:
                 self.respond("You haven't told me your name yet.")
             else:
                 self.respond("My name is python commander. How are you?")
+        else:
+            f = Fetcher("https://www.google.de/search?q=" + text)
+            answer = f.lookup()
+            self.respond(answer)
 
         if "launch" or "open" in text:
             app = text.split(" ", 1)[-1]
@@ -22,5 +29,4 @@ class Commander:
 
 
     def respond(self, response):
-        print(response)
-        subprocess.call("say " + response, shell=True)
+        subprocess.call("say " + response + "'", shell=True)
