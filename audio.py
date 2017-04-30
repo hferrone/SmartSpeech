@@ -1,6 +1,7 @@
 import pyaudio
 import wave
 import speech_recognition as sr
+import subprocess
 
 
 r = sr.Recognizer()
@@ -43,6 +44,13 @@ def init_speech():
         print("Couldn't understand you clearly.")
 
     print("Your command: ", command)
+    print(command)
+
+    speak(command)
+
+
+def speak(text):
+    subprocess.call('say ' + text, shell=True)
 
 
 init_speech()
